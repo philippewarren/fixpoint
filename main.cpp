@@ -16,6 +16,7 @@ int main()
     std::cout << static_cast<double>(a - b) << "\n";
     std::cout << static_cast<double>(d / 2.0_fx) << "\n";
     std::cout << static_cast<uint16_t>(c / 2.0_fx) << "\n";
+    std::cout << static_cast<double>(a >> 1) << "\n";
     std::cout << std::boolalpha << std::is_standard_layout<Fix>() << "\n";
     std::cout << std::boolalpha << std::is_trivial<Fix>() << "\n";
 

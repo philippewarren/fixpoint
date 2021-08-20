@@ -73,6 +73,26 @@ public:
         return *this;
     }
 
+    constexpr Fix operator<<(size_t rhs) const noexcept
+    {
+        return Fix::withValue(this->val << rhs);
+    }
+    constexpr Fix& operator<<=(size_t rhs) noexcept
+    {
+        this->val = (this->val << rhs);
+        return *this;
+    }
+
+    constexpr Fix operator>>(size_t rhs) const noexcept
+    {
+        return Fix::withValue(this->val >> rhs);
+    }
+    constexpr Fix& operator>>=(size_t rhs) noexcept
+    {
+        this->val = (this->val >> rhs);
+        return *this;
+    }
+
     constexpr explicit operator float() noexcept
     {
         return static_cast<float>(val) / MULTIPLY_VALUE;
@@ -100,12 +120,8 @@ private:
     constexpr static uint64_t MULTIPLY_VALUE = UINT16_MAX;
     constexpr static uint64_t BITSHIFT_VALUE = bitsizeof<uint16_t>();
 
-    constexpr static Fix withValue(int64_t value) noexcept
-    {
-        Fix fix(0);
-        fix.val = value;
-        return fix;
-    }
+    constexpr Fix(int64_t value, bool directValueOverload) : val(value) {}
+    constexpr static Fix withValue(int64_t value) noexcept { return Fix(value, true); }
 };
 
 constexpr Fix operator""_fx(long double value) noexcept
