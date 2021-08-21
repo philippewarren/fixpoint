@@ -19,6 +19,8 @@ int main()
     std::cout << static_cast<double>(a >> 1) << "\n";
     std::cout << std::boolalpha << std::is_standard_layout<Fix>() << "\n";
     std::cout << std::boolalpha << std::is_trivial<Fix>() << "\n";
+    std::cout << std::boolalpha << (sizeof(Fix) <= 2 * sizeof(void*)) << "\n";
+    std::cout << static_cast<double>(45.3_fx + Fix(true)) << "\n";
 
     return 0;
 }

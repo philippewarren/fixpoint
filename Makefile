@@ -1,11 +1,14 @@
 CPPC = g++ --std=gnu++17
+EXE = fixpoint.exe
 
-all: fixpoint.exe
+.PHONY: all clean run
 
-fixpoint.exe: main.cpp fixpoint.hpp
-	$(CPPC) main.cpp -o fixpoint.exe
+all: $(EXE)
+
+$(EXE): main.cpp fixpoint.hpp
+	$(CPPC) main.cpp -o $(EXE)
 
 clean:
 	mkdir -p .out
 	# mv -f *.o ./.out/
-	mv -f fixpoint.exe ./.out/
+	mv -f $(EXE) ./.out/

@@ -33,41 +33,41 @@ public:
     constexpr Fix& operator=(const Fix& rhs) noexcept = default;
     constexpr Fix& operator=(Fix&& rhs) noexcept = default;
 
-    constexpr Fix operator+(const Fix& rhs) const noexcept
+    constexpr Fix operator+(Fix rhs) const noexcept
     {
         return Fix::withValue(this->val + rhs.val);
     }
-    constexpr Fix& operator+=(const Fix& rhs) noexcept
+    constexpr Fix& operator+=(Fix rhs) noexcept
     {
         this->val += rhs.val;
         return *this;
     }
 
-    constexpr Fix operator-(const Fix& rhs) const noexcept
+    constexpr Fix operator-(Fix rhs) const noexcept
     {
         return Fix::withValue(this->val - rhs.val);
     }
-    constexpr Fix& operator-=(const Fix& rhs) noexcept
+    constexpr Fix& operator-=(Fix rhs) noexcept
     {
         this->val -= rhs.val;
         return *this;
     }
 
-    constexpr Fix operator*(const Fix& rhs) const noexcept
+    constexpr Fix operator*(Fix rhs) const noexcept
     {
         return Fix::withValue((this->val * rhs.val) >> BITSHIFT_VALUE);
     }
-    constexpr Fix& operator*=(const Fix& rhs) noexcept
+    constexpr Fix& operator*=(Fix rhs) noexcept
     {
         this->val = (this->val * rhs.val) >> BITSHIFT_VALUE;
         return *this;
     }
 
-    constexpr Fix operator/(const Fix& rhs) const noexcept
+    constexpr Fix operator/(Fix rhs) const noexcept
     {
         return Fix::withValue(((this->val << BITSHIFT_VALUE) / rhs.val));
     }
-    constexpr Fix& operator/=(const Fix& rhs) noexcept
+    constexpr Fix& operator/=(Fix rhs) noexcept
     {
         this->val = ((this->val << BITSHIFT_VALUE) / rhs.val);
         return *this;
@@ -92,6 +92,15 @@ public:
         this->val = (this->val >> rhs);
         return *this;
     }
+
+    constexpr bool operator==(Fix rhs) const noexcept { return this->val == rhs.val; }
+    constexpr bool operator!=(Fix rhs) const noexcept { return this->val != rhs.val; }
+    constexpr bool operator<(Fix rhs) const noexcept { return this->val < rhs.val; }
+    constexpr bool operator>(Fix rhs) const noexcept { return this->val > rhs.val; }
+    constexpr bool operator<=(Fix rhs) const noexcept { return this->val <= rhs.val; }
+    constexpr bool operator>=(Fix rhs) const noexcept { return this->val >= rhs.val; }
+
+    constexpr operator bool() noexcept { return static_cast<bool>(val); }
 
     constexpr explicit operator float() noexcept
     {
